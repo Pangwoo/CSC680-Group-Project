@@ -27,7 +27,7 @@ struct TaskListView: View {
                 .cornerRadius(10)
                 .padding([.horizontal, .top])
 
-                // 선택된 카테고리에 따른 타이틀 표시
+                // show the title for chosen category
                 Text(displayTitle)
                     .font(.title)
                     .padding(.bottom, 5)

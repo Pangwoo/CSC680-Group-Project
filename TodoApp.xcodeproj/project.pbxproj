@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93894E372BEA4B1F00F2C0BC /* TodoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E362BEA4B1F00F2C0BC /* TodoAppApp.swift */; };
+		93894E372BEA4B1F00F2C0BC /* TodoListApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E362BEA4B1F00F2C0BC /* TodoListApplication.swift */; };
 		93894E392BEA4B1F00F2C0BC /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E382BEA4B1F00F2C0BC /* TaskListView.swift */; };
 		93894E3B2BEA4B2100F2C0BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93894E3A2BEA4B2100F2C0BC /* Assets.xcassets */; };
 		93894E3E2BEA4B2100F2C0BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93894E3D2BEA4B2100F2C0BC /* Preview Assets.xcassets */; };
@@ -18,7 +18,7 @@
 
 /* Begin PBXFileReference section */
 		93894E332BEA4B1F00F2C0BC /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		93894E362BEA4B1F00F2C0BC /* TodoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppApp.swift; sourceTree = "<group>"; };
+		93894E362BEA4B1F00F2C0BC /* TodoListApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApplication.swift; sourceTree = "<group>"; };
 		93894E382BEA4B1F00F2C0BC /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		93894E3A2BEA4B2100F2C0BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93894E3D2BEA4B2100F2C0BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		93894E352BEA4B1F00F2C0BC /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
-				93894E362BEA4B1F00F2C0BC /* TodoAppApp.swift */,
+				93894E362BEA4B1F00F2C0BC /* TodoListApplication.swift */,
 				93894E382BEA4B1F00F2C0BC /* TaskListView.swift */,
 				93894E3A2BEA4B2100F2C0BC /* Assets.xcassets */,
 				93894E3C2BEA4B2100F2C0BC /* Preview Content */,
@@ -150,7 +150,7 @@
 				93894E472BEA4E5800F2C0BC /* TaskViewModel.swift in Sources */,
 				93894E452BEA4CD100F2C0BC /* Task.swift in Sources */,
 				93894E492BEA4E9A00F2C0BC /* TaskCreateView.swift in Sources */,
-				93894E372BEA4B1F00F2C0BC /* TodoAppApp.swift in Sources */,
+				93894E372BEA4B1F00F2C0BC /* TodoListApplication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
