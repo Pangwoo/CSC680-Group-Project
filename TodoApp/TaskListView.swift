@@ -4,6 +4,7 @@ struct TaskListView: View {
     @ObservedObject var viewModel = TaskViewModel()
     @State private var selectedCategory: TaskCategory?
     @State private var showingCompletedTasks = false
+    
 
     var body: some View {
         NavigationView {
