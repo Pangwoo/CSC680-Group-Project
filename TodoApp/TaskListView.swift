@@ -4,7 +4,6 @@ struct TaskListView: View {
     @ObservedObject var viewModel = TaskViewModel()
     @State private var selectedCategory: TaskCategory?
     @State private var showingCompletedTasks = false
-    
 
     var body: some View {
         NavigationView {
@@ -23,7 +22,16 @@ struct TaskListView: View {
                 .cornerRadius(10)
                 .padding([.horizontal, .top])
 
-                // Display the title for the chosen category
+                // Sort button section
+                HStack {
+                    sortButton(for: .dueDate, label: "Due Date")
+                    sortButton(for: .addedDate, label: "Added Date")
+                    sortButton(for: .priority, label: "Priority")
+                }
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity)
+
+                // Show selected category title
                 Text(displayTitle)
                     .font(.title)
                     .padding(.bottom, 5)
@@ -32,7 +40,6 @@ struct TaskListView: View {
                 List {
                     ForEach(filteredTasks) { task in
                         HStack {
-                            // Completion check box
                             Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                 .onTapGesture {
                                     viewModel.updateTaskStatus(id: task.id, isCompleted: !task.isCompleted)
@@ -40,11 +47,9 @@ struct TaskListView: View {
                                 .foregroundColor(task.isCompleted ? .green : .gray)
                                 .padding(.trailing, 8)
 
-                            // NavigationLink to navigate to the detail page
                             NavigationLink(destination: TaskDetailView(task: task)) {
                                 VStack(alignment: .leading) {
-                                    Text(task.title)
-                                        .font(.headline)
+                                    Text(task.title).font(.headline)
                                     Text("Due: \(task.dueDate, style: .date)")
                                     Text("Priority: \(task.priority)")
                                 }
@@ -52,14 +57,14 @@ struct TaskListView: View {
 
                             Spacer()
                         }
-                        .swipeActions { // Adds swipe actions for each task
+                        .swipeActions {
                             Button("Complete") {
-                                viewModel.completeTask(id: task.id) // Completes the task
+                                viewModel.completeTask(id: task.id)
                             }
                             .tint(.green)
                             
                             Button(role: .destructive) {
-                                viewModel.removeTask(id: task.id) // Deletes the task
+                                viewModel.removeTask(id: task.id)
                             } label: {
                                 Text("Delete")
                             }
@@ -68,21 +73,21 @@ struct TaskListView: View {
                 }
             }
             .navigationTitle("To Do Lists")
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button("Completed Tasks") {
-                                    showingCompletedTasks = true
-                                }
-                            }
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                NavigationLink("Add Task", destination: TaskCreateView(viewModel: viewModel))
-                            }
-                        }
-                        .sheet(isPresented: $showingCompletedTasks) {
-                            CompletedTaskView(viewModel: viewModel)
-                        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Completed Tasks") {
+                        showingCompletedTasks = true
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink("Add Task", destination: TaskCreateView(viewModel: viewModel))
+                }
+            }
+            .sheet(isPresented: $showingCompletedTasks) {
+                CompletedTaskView(viewModel: viewModel)
+            }
+        }
+    }
 
     // Function to create a category button
     private func categoryButton(for category: TaskCategory?, icon: String, label: String) -> some View {
@@ -90,13 +95,25 @@ struct TaskListView: View {
             selectedCategory = category
         }) {
             VStack {
-                Image(systemName: icon)
-                    .padding(2)
+                Image(systemName: icon).padding(2)
             }
             .padding()
             .foregroundColor(selectedCategory == category ? .blue : .primary)
             .background(selectedCategory == category ? Color(UIColor.systemBlue.withAlphaComponent(0.1)) : Color.clear)
             .cornerRadius(8)
+        }
+    }
+
+    // Function to create a sort button
+    private func sortButton(for criteria: TaskViewModel.SortCriteria, label: String) -> some View {
+        Button(action: {
+            viewModel.setSortCriteria(criteria)
+        }) {
+            Text(label)
+                .padding()
+                .foregroundColor(viewModel.sortCriteria == criteria ? .blue : .primary)
+                .background(viewModel.sortCriteria == criteria ? Color(UIColor.systemBlue.withAlphaComponent(0.1)) : Color.clear)
+                .cornerRadius(8)
         }
     }
 
@@ -116,7 +133,6 @@ struct TaskListView: View {
         return viewModel.tasks.filter { $0.category == selectedCategory }
     }
 }
-
 
 #Preview {
     TaskListView()

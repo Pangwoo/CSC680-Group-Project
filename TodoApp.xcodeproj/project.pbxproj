@@ -63,9 +63,9 @@
 			children = (
 				93894E362BEA4B1F00F2C0BC /* TodoListApplication.swift */,
 				93894E382BEA4B1F00F2C0BC /* TaskListView.swift */,
+				93894E442BEA4CD100F2C0BC /* Task.swift */,
 				93894E3A2BEA4B2100F2C0BC /* Assets.xcassets */,
 				93894E3C2BEA4B2100F2C0BC /* Preview Content */,
-				93894E442BEA4CD100F2C0BC /* Task.swift */,
 				93894E462BEA4E5800F2C0BC /* TaskViewModel.swift */,
 				93894E482BEA4E9A00F2C0BC /* TaskCreateView.swift */,
 				93894E4A2BECAD5600F2C0BC /* TaskDetailView.swift */,

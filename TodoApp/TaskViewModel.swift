@@ -10,18 +10,18 @@ import Foundation
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var completedTasks: [Task] = []
-    @Published var sortOption: SortOption = .none
+    @Published var sortCriteria: SortCriteria = .addedDate
     
-    enum SortOption {
-            case none, byDueDate, byPriority
+    enum SortCriteria {
+            case dueDate, addedDate, priority
         }
 
     func addTask(title: String, description: String, dueDate: Date, priority: Int, category: String) {
-        
-        let categoryEnum = TaskCategory(rawValue: category) ?? .others
-        let newTask = Task(title: title, description: description, dueDate: dueDate, priority: priority, category: categoryEnum)
-        tasks.append(newTask)
-    }
+            let categoryEnum = TaskCategory(rawValue: category) ?? .others
+            let newTask = Task(title: title, description: description, dueDate: dueDate, priority: priority, category: categoryEnum)
+            tasks.append(newTask)
+            sortTasks()
+        }
 
     func updateTaskStatus(id: UUID, isCompleted: Bool) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
@@ -37,10 +37,6 @@ class TaskViewModel: ObservableObject {
             completedTasks.remove(at: completedIndex)
         }
     }
-
-//    func getSortedTasks(by priority: Bool) -> [Task] {
-//        return priority ? tasks.sorted(by: { $0.priority > $1.priority }) : tasks
-//    }
     
     func completeTask(id: UUID) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
@@ -48,5 +44,21 @@ class TaskViewModel: ObservableObject {
             completedTasks.append(completedTask)
         }
     }
+    
+    func sortTasks() {
+        switch sortCriteria {
+        case .dueDate:
+            tasks.sort { $0.dueDate < $1.dueDate }
+        case .addedDate:
+            tasks.sort { $0.addedDate < $1.addedDate }
+        case .priority:
+            tasks.sort { $0.priority > $1.priority }
+        }
+    }
+    
+    func setSortCriteria(_ criteria: SortCriteria) {
+            sortCriteria = criteria
+            sortTasks()
+        }
 }
 

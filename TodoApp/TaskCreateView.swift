@@ -21,7 +21,6 @@ struct TaskCreateView: View {
                     Text(category.rawValue).tag(category)
                 }
             }
-//            .pickerStyle(SegmentedPickerStyle())
 
             Button("Add Task") {
                 viewModel.addTask(title: title, description: description, dueDate: dueDate, priority: priority, category: selectedCategory.rawValue)
