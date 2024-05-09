@@ -1,19 +1,14 @@
-//
-//  ContentView.swift
-//  TodoApp
-//
-//  Created by Jooho Chang on 5/7/24.
-//
-
 import SwiftUI
 
 struct TaskListView: View {
     @ObservedObject var viewModel = TaskViewModel()
     @State private var selectedCategory: TaskCategory?
+    @State private var showingCompletedTasks = false
 
     var body: some View {
         NavigationView {
             VStack {
+                // Category button section
                 HStack {
                     categoryButton(for: nil, icon: "tray.full", label: "All")
                     categoryButton(for: .assignments, icon: "books.vertical", label: "Assignments")
@@ -27,38 +22,68 @@ struct TaskListView: View {
                 .cornerRadius(10)
                 .padding([.horizontal, .top])
 
-                // show the title for chosen category
+                // Display the title for the chosen category
                 Text(displayTitle)
                     .font(.title)
                     .padding(.bottom, 5)
 
+                // Task list section
                 List {
                     ForEach(filteredTasks) { task in
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text(task.title)
-                                    .font(.headline)
-                                Text("Due: \(task.dueDate, style: .date)")
-                                Text("Priority: \(task.priority)")
-                            }
-                            Spacer()
+                            // Completion check box
                             Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                 .onTapGesture {
                                     viewModel.updateTaskStatus(id: task.id, isCompleted: !task.isCompleted)
                                 }
+                                .foregroundColor(task.isCompleted ? .green : .gray)
+                                .padding(.trailing, 8)
+
+                            // NavigationLink to navigate to the detail page
+                            NavigationLink(destination: TaskDetailView(task: task)) {
+                                VStack(alignment: .leading) {
+                                    Text(task.title)
+                                        .font(.headline)
+                                    Text("Due: \(task.dueDate, style: .date)")
+                                    Text("Priority: \(task.priority)")
+                                }
+                            }
+
+                            Spacer()
+                        }
+                        .swipeActions { // Adds swipe actions for each task
+                            Button("Complete") {
+                                viewModel.completeTask(id: task.id) // Completes the task
+                            }
+                            .tint(.green)
+                            
+                            Button(role: .destructive) {
+                                viewModel.removeTask(id: task.id) // Deletes the task
+                            } label: {
+                                Text("Delete")
+                            }
                         }
                     }
-                    .onDelete(perform: deleteTask)
                 }
             }
             .navigationTitle("To Do Lists")
-            .navigationBarItems(trailing:
-                NavigationLink("Add Task", destination: TaskCreateView(viewModel: viewModel))
-            )
-        }
-    }
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Completed Tasks") {
+                                    showingCompletedTasks = true
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                NavigationLink("Add Task", destination: TaskCreateView(viewModel: viewModel))
+                            }
+                        }
+                        .sheet(isPresented: $showingCompletedTasks) {
+                            CompletedTaskView(viewModel: viewModel)
+                        }
+                    }
+                }
 
-    // function for creating category button
+    // Function to create a category button
     private func categoryButton(for category: TaskCategory?, icon: String, label: String) -> some View {
         Button(action: {
             selectedCategory = category
@@ -74,7 +99,7 @@ struct TaskListView: View {
         }
     }
 
-    // display title based on the selected category
+    // Display the title based on the selected category
     private var displayTitle: String {
         guard let category = selectedCategory else {
             return "All"
@@ -82,24 +107,14 @@ struct TaskListView: View {
         return "\(category.rawValue)"
     }
 
-    // show filtered lists
+    // Return a list of filtered tasks
     private var filteredTasks: [Task] {
         guard let selectedCategory = selectedCategory else {
             return viewModel.tasks
         }
         return viewModel.tasks.filter { $0.category == selectedCategory }
     }
-
-    private func deleteTask(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let taskId = filteredTasks[index].id
-            viewModel.removeTask(id: taskId)
-        }
-    }
 }
-
-
-
 
 
 #Preview {

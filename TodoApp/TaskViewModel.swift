@@ -9,6 +9,7 @@ import Foundation
 
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
+    @Published var completedTasks: [Task] = []
 
     func addTask(title: String, description: String, dueDate: Date, priority: Int, category: String) {
         
@@ -24,11 +25,23 @@ class TaskViewModel: ObservableObject {
     }
 
     func removeTask(id: UUID) {
-        tasks.removeAll { $0.id == id }
+        if let index = tasks.firstIndex(where: { $0.id == id }) {
+            tasks.remove(at: index)
+        }
+        if let completedIndex = completedTasks.firstIndex(where: { $0.id == id }) {
+            completedTasks.remove(at: completedIndex)
+        }
     }
 
     func getSortedTasks(by priority: Bool) -> [Task] {
         return priority ? tasks.sorted(by: { $0.priority > $1.priority }) : tasks
+    }
+    
+    func completeTask(id: UUID) {
+        if let index = tasks.firstIndex(where: { $0.id == id }) {
+            let completedTask = tasks.remove(at: index)
+            completedTasks.append(completedTask)
+        }
     }
 }
 
