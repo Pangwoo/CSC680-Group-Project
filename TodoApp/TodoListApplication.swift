@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct TodoListApplication: App {
+    
+    init() {
+            NotificationManager.instance.requestAuthorization()
+        }
+    
     var body: some Scene {
         WindowGroup {
             TaskListView()

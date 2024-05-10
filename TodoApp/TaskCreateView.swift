@@ -8,6 +8,8 @@ struct TaskCreateView: View {
     @State private var dueDate = Date()
     @State private var priority = 1
     @State private var selectedCategory: TaskCategory = .assignments
+    
+    @State private var enableNotification = false
 
     var body: some View {
         Form {
@@ -21,9 +23,11 @@ struct TaskCreateView: View {
                     Text(category.rawValue).tag(category)
                 }
             }
-
+            
+            Toggle("Enable Notification", isOn: $enableNotification)
+            
             Button("Add Task") {
-                viewModel.addTask(title: title, description: description, dueDate: dueDate, priority: priority, category: selectedCategory.rawValue)
+                viewModel.addTask(title: title, description: description, dueDate: dueDate, priority: priority, category: selectedCategory.rawValue, enableNotification: enableNotification)
                 presentationMode.wrappedValue.dismiss()
             }
         }

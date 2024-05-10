@@ -16,6 +16,8 @@
 		93894E492BEA4E9A00F2C0BC /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E482BEA4E9A00F2C0BC /* TaskCreateView.swift */; };
 		93894E4B2BECAD5600F2C0BC /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E4A2BECAD5600F2C0BC /* TaskDetailView.swift */; };
 		93894E4D2BECB45C00F2C0BC /* CompletedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E4C2BECB45C00F2C0BC /* CompletedTaskView.swift */; };
+		93894E542BEE2CA000F2C0BC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93894E532BEE2CA000F2C0BC /* UserNotifications.framework */; };
+		93894E562BEE2E3E00F2C0BC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93894E552BEE2E3E00F2C0BC /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		93894E482BEA4E9A00F2C0BC /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
 		93894E4A2BECAD5600F2C0BC /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		93894E4C2BECB45C00F2C0BC /* CompletedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskView.swift; sourceTree = "<group>"; };
+		93894E512BEE2C8000F2C0BC /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		93894E532BEE2CA000F2C0BC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		93894E552BEE2E3E00F2C0BC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93894E542BEE2CA000F2C0BC /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +53,7 @@
 			children = (
 				93894E352BEA4B1F00F2C0BC /* TodoApp */,
 				93894E342BEA4B1F00F2C0BC /* Products */,
+				93894E502BEE2C8000F2C0BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +77,7 @@
 				93894E482BEA4E9A00F2C0BC /* TaskCreateView.swift */,
 				93894E4A2BECAD5600F2C0BC /* TaskDetailView.swift */,
 				93894E4C2BECB45C00F2C0BC /* CompletedTaskView.swift */,
+				93894E552BEE2E3E00F2C0BC /* NotificationManager.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -80,6 +88,15 @@
 				93894E3D2BEA4B2100F2C0BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		93894E502BEE2C8000F2C0BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93894E532BEE2CA000F2C0BC /* UserNotifications.framework */,
+				93894E512BEE2C8000F2C0BC /* VideoToolbox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +175,7 @@
 				93894E4B2BECAD5600F2C0BC /* TaskDetailView.swift in Sources */,
 				93894E452BEA4CD100F2C0BC /* Task.swift in Sources */,
 				93894E492BEA4E9A00F2C0BC /* TaskCreateView.swift in Sources */,
+				93894E562BEE2E3E00F2C0BC /* NotificationManager.swift in Sources */,
 				93894E372BEA4B1F00F2C0BC /* TodoListApplication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,12 +16,15 @@ class TaskViewModel: ObservableObject {
             case dueDate, addedDate, priority
         }
 
-    func addTask(title: String, description: String, dueDate: Date, priority: Int, category: String) {
-            let categoryEnum = TaskCategory(rawValue: category) ?? .others
-            let newTask = Task(title: title, description: description, dueDate: dueDate, priority: priority, category: categoryEnum)
-            tasks.append(newTask)
-            sortTasks()
+    func addTask(title: String, description: String, dueDate: Date, priority: Int, category: String, enableNotification: Bool) {
+        let categoryEnum = TaskCategory(rawValue: category) ?? .others
+        let newTask = Task(title: title, description: description, dueDate: dueDate, priority: priority, category: categoryEnum)
+        tasks.append(newTask)
+        sortTasks()
+        if enableNotification {
+            NotificationManager.instance.scheduleNotification(task: newTask)
         }
+    }
 
     func updateTaskStatus(id: UUID, isCompleted: Bool) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
