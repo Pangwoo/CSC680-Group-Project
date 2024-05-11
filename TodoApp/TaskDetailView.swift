@@ -37,3 +37,7 @@ struct TaskDetailView: View {
     }
 }
 
+
+#Preview {
+    TaskListView()
+}

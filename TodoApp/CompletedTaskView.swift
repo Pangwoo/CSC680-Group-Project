@@ -34,4 +34,6 @@ struct CompletedTaskView: View {
     }
 }
 
-
+#Preview {
+    TaskListView()
+}

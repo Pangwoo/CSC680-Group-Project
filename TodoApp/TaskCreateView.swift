@@ -13,10 +13,10 @@ struct TaskCreateView: View {
 
     var body: some View {
         Form {
-            TextField("Title", text: $title)
-            TextField("Description", text: $description)
-            DatePicker("Due Date", selection: $dueDate, displayedComponents: [.date, .hourAndMinute])
-            Stepper("Priority: \(priority)", value: $priority, in: 1...5)
+            TextField("Title", text: $title).padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
+            TextField("Description", text: $description).padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
+            DatePicker("Due Date", selection: $dueDate, displayedComponents: [.date, .hourAndMinute]).padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
+            Stepper("Priority: \(priority)", value: $priority, in: 1...5).padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
             
             Picker("Category", selection: $selectedCategory) {
                 ForEach(TaskCategory.allCases, id: \.self) { category in
@@ -24,13 +24,27 @@ struct TaskCreateView: View {
                 }
             }
             
-            Toggle("Enable Notification", isOn: $enableNotification)
+            Toggle("Enable Notification", isOn: $enableNotification).padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
             
-            Button("Add Task") {
-                viewModel.addTask(title: title, description: description, dueDate: dueDate, priority: priority, category: selectedCategory.rawValue, enableNotification: enableNotification)
-                presentationMode.wrappedValue.dismiss()
-            }
+            HStack {
+                    Spacer()
+                    Button("Add Task") {
+                        viewModel.addTask(title: title, description: description, dueDate: dueDate, priority: priority, category: selectedCategory.rawValue, enableNotification: enableNotification)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .padding()
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    Spacer()
+                }
         }
+        .contentMargins(20)
         .navigationTitle("Create Task")
     }
+}
+
+#Preview {
+    TaskListView()
 }
