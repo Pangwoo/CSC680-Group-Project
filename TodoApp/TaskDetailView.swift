@@ -18,7 +18,7 @@ struct TaskDetailView: View {
             Text(task.description)
                 .font(.body) // Sets the description font to body
                 .padding()
-            Text("Due: \(task.dueDate, style: .date)") // Displays the due date
+            Text("Due: \(task.dueDate, style: .date) \(task.dueDate, style: .time)") // Displays the due date
                 .font(.headline) // Sets the due date font to headline
                 .padding()
             HStack {

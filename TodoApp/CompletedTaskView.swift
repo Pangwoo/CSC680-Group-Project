@@ -18,7 +18,7 @@ struct CompletedTaskView: View {
                     VStack(alignment: .leading) {
                         Text(task.title)
                             .font(.headline)
-                        Text("Due: \(task.dueDate, style: .date)")
+                        Text("Due: \(task.dueDate, style: .date) \(task.dueDate, style: .time)")
                         Text("Priority: \(task.priority)")
                     }
                 }

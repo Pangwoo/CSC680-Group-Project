@@ -15,7 +15,7 @@ struct TaskCreateView: View {
         Form {
             TextField("Title", text: $title)
             TextField("Description", text: $description)
-            DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
+            DatePicker("Due Date", selection: $dueDate, displayedComponents: [.date, .hourAndMinute])
             Stepper("Priority: \(priority)", value: $priority, in: 1...5)
             
             Picker("Category", selection: $selectedCategory) {
