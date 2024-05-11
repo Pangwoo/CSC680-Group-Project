@@ -51,7 +51,7 @@ struct TaskListView: View {
                                 VStack(alignment: .leading) {
                                     Text(task.title).font(.headline)
                                     Text("Due: \(task.dueDate, style: .date) \(task.dueDate, style: .time)")
-                                    Text("Priority: \(task.priority)")
+                                    priorityText(task.priority)
                                 }
                             }
 
@@ -131,6 +131,31 @@ struct TaskListView: View {
             return viewModel.tasks
         }
         return viewModel.tasks.filter { $0.category == selectedCategory }
+    }
+    
+    // Function to return priority text with styling based on priority level
+    private func priorityText(_ priority: Int) -> some View {
+        let color: Color
+        let fontWeight: Font.Weight
+
+        switch priority {
+        case 3:
+            color = .red
+            fontWeight = .bold
+        case 2:
+            color = .orange
+            fontWeight = .bold
+        case 1:
+            color = .green
+            fontWeight = .bold
+        default:
+            color = .red
+            fontWeight = .bold
+        }
+
+        return Text("Priority: \(priority)")
+            .fontWeight(fontWeight)
+            .foregroundColor(color)
     }
 }
 
