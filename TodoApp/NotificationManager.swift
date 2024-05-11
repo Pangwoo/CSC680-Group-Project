@@ -25,10 +25,12 @@ class NotificationManager {
     func scheduleNotification(task: Task) {
             let content = UNMutableNotificationContent()
             content.title = "Task Reminder"
-            content.body = "Reminder: \(task.title) is due!"
+            content.body = "Reminder: \(task.title) is due in 5 minutes!"
             content.sound = UNNotificationSound.default
+        
+            let earlyDate = Calendar.current.date(byAdding: .minute, value: -5, to: task.dueDate) ?? task.dueDate
 
-            let targetDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: task.dueDate)
+            let targetDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: earlyDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: targetDate, repeats: false)
 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
