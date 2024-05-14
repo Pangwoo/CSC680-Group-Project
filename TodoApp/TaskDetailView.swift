@@ -13,27 +13,49 @@ struct TaskDetailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text(task.title)
-                .font(.largeTitle) // Sets the title font to large
+                .font(.largeTitle)
+                .fontWeight(.bold)
                 .padding()
+                .foregroundColor(.primary)
+
             Text(task.description)
-                .font(.body) // Sets the description font to body
+                .font(.body)
+                .foregroundColor(.secondary)
                 .padding()
-            Text("Due: \(task.dueDate, style: .date) \(task.dueDate, style: .time)") // Displays the due date
-                .font(.headline) // Sets the due date font to headline
-                .padding()
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(8)
+
+            Text("Due: \(task.dueDate, style: .date) \(task.dueDate, style: .time)")
+                .font(.headline)
+                .foregroundColor(.blue)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+                .background(Color(UIColor.systemGray5))
+                .cornerRadius(8)
+
             HStack {
-                Text("Completed: ") // Label for completion status
-                    .font(.headline) // Sets the label font to headline
-                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle") // Shows an icon based on completion status
+                Text("Completed:")
+                    .font(.headline)
+                    .foregroundColor(.green)
+                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(task.isCompleted ? .green : .red)
+                    .imageScale(.large)
             }
             .padding()
-            Text("Category: \(task.category.rawValue)") // Displays the category of the task
-                .font(.subheadline) // Sets the category font to subheadline
+            .background(Color(UIColor.systemGray5))
+            .cornerRadius(8)
+
+            Text("Category: \(task.category.rawValue)")
+                .font(.subheadline)
+                .foregroundColor(.purple)
                 .padding()
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(8)
+
             Spacer()
         }
-        .navigationBarTitle("Task Details", displayMode: .inline) // Sets the navigation bar title
         .padding()
+        .navigationBarTitle("Task Details", displayMode: .inline)
     }
 }
 
