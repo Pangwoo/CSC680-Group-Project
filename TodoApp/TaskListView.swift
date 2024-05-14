@@ -71,6 +71,11 @@ struct TaskListView: View {
                         }
                     }
                 }
+                Text("Swipe to complete or delete task")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                                    .padding(.top, 5)
+                                    .padding(.bottom, 10)
             }
             .navigationTitle("To Do Lists")
             .toolbar {
